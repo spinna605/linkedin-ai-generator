@@ -6,13 +6,13 @@ async function generate() {
   output.innerText = "Generating...";
 
   try {
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+   const res = await fetch("/api/generate", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ niche })
+});
         model: "meta-llama/llama-3-8b-instruct",
         messages: [{
           role: "user",
