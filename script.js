@@ -7,7 +7,7 @@ async function generate() {
   const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer YOUR_API_KEY",
+      "Authorization": "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",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
