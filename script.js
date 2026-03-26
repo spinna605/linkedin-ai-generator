@@ -6,19 +6,13 @@ async function generate() {
   output.innerText = "Generating...";
 
   try {
-   const res = await fetch("/api/generate", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ niche })
-});
-        model: "meta-llama/llama-3-8b-instruct",
-        messages: [{
-          role: "user",
-          content: `Create 7 LinkedIn posts for ${niche}`
-        }]
-      })
+
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ niche })
     });
 
     const data = await res.json();
