@@ -1,8 +1,14 @@
 async function generate() {
+
   const niche = document.getElementById("niche").value;
   const output = document.getElementById("output");
 
-  output.textContent = "Generating...";
+  if (!niche) {
+    alert("Please enter a niche first");
+    return;
+  }
+
+  output.innerHTML = "⏳ Generating high-converting posts...";
 
   try {
     const res = await fetch("/api/generate", {
@@ -13,21 +19,19 @@ async function generate() {
       body: JSON.stringify({ niche })
     });
 
-    // Handle non-JSON errors properly
     if (!res.ok) {
       const text = await res.text();
-      output.textContent = "ERROR: " + text;
+      output.innerHTML = "❌ ERROR: " + text;
       return;
     }
 
     const data = await res.json();
 
-    // Extract AI response safely
     const content = data.choices?.[0]?.message?.content;
 
-    output.textContent = content || "No response from AI";
+    output.innerHTML = content || "No response from AI";
 
   } catch (err) {
-    output.textContent = "FAILED: " + err.message;
+    output.innerHTML = "❌ FAILED: " + err.message;
   }
 }
