@@ -1,23 +1,45 @@
 export default async function handler(req, res) {
 
+  // Only allow POST
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
   const { niche } = req.body;
 
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + process.env.OPENROUTER_API_KEY
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "meta-llama/llama-3-8b-instruct",
-      messages: [{
-        role: "user",
-        content: `Create 7 LinkedIn posts for ${niche}`
-      }]
-    })
-  });
+  if (!niche) {
+    return res.status(400).json({ error: "Missing niche" });
+  }
 
-  const data = await response.json();
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + process.env.OPENROUTER_API_KEY, // ✅ CORRECT
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "meta-llama/llama-3-8b-instruct",
+        messages: [
+          {
+            role: "user",
+            content: `Create 7 high-quality LinkedIn posts for a ${niche} business. Make them engaging, professional, and viral-ready.`
+          }
+        ]
+      })
+    });
 
-  res.status(200).json(data);
+    // Handle API errors properly
+    if (!response.ok) {
+      const text = await response.text();
+      return res.status(response.status).json({ error: text });
+    }
+
+    const data = await response.json();
+
+    return res.status(200).json(data);
+
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 }
