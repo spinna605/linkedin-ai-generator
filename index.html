@@ -1,16 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LinkedIn AI Generator</title>
+  <title>Nexis AI Writer</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #111827;
+      padding: 40px;
+      border-radius: 20px;
+      width: 420px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: none;
+      background: #1f2937;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .generate-btn {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .generate-btn:hover {
+      background: #2563eb;
+    }
+
+    .pay-btn {
+      background: #22c55e;
+      color: black;
+    }
+
+    .pay-btn:hover {
+      background: #16a34a;
+    }
+
+    #output {
+      margin-top: 20px;
+      background: #020617;
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      max-height: 220px;
+      overflow-y: auto;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .badge {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #22c55e;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>LinkedIn AI Post Generator</h1>
+  <div class="container">
 
-  <input id="niche" placeholder="Enter your business" />
-  <button onclick="generate()">Generate</button>
+    <h1>🚀 Nexis AI Writer</h1>
+    <p>Generate viral LinkedIn content in seconds</p>
 
-  <pre id="output"></pre>
+    <!-- PAYWALL -->
+    <div class="paywall">
+      <p>Unlock unlimited access</p>
+
+      <a href="https://www.paypal.com/paypalme/sinnkie86/5" target="_blank">
+        <button class="pay-btn">Unlock for $5</button>
+      </a>
+
+      <div class="badge">One-time payment • Instant access</div>
+    </div>
+
+    <!-- INPUT -->
+    <input id="niche" placeholder="e.g. marketing agency" />
+
+    <!-- BUTTON -->
+    <button class="generate-btn" onclick="generate()">
+      Generate Posts
+    </button>
+
+    <!-- OUTPUT -->
+    <div id="output"></div>
+
+  </div>
 
   <script src="script.js"></script>
 
